@@ -72,3 +72,55 @@ public class Assignment1_2_3 {
         }
         return head;
     }
+// -------------------------
+    // Assignment 2: Palindrome Linked List
+    // O(n) time, O(1) extra space
+    // -------------------------
+    static boolean isPalindrome(Node head) {
+        if (head == null || head.next == null) return true;
+
+        // 1) find middle (slow/fast)
+        Node slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // if odd length, skip the middle node
+        if (fast != null) { // odd
+            slow = slow.next;
+        }
+
+        // 2) reverse second half
+        Node secondHalf = reverseList(slow);
+
+        // 3) compare first half and reversed second half
+        Node p1 = head;
+        Node p2 = secondHalf;
+        boolean ok = true;
+        while (p2 != null) { // only need to compare length of second half
+            if (p1.key != p2.key) {
+                ok = false;
+                break;
+            }
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        // 4) (optional but good practice) restore list
+        reverseList(secondHalf);
+
+        return ok;
+    }
+
+    static Node reverseList(Node head) {
+        Node prev = null;
+        Node cur = head;
+        while (cur != null) {
+            Node nxt = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = nxt;
+        }
+        return prev;
+    }
