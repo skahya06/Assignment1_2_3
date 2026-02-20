@@ -72,6 +72,7 @@ public class Assignment1_2_3 {
         }
         return head;
     }
+
 // -------------------------
     // Assignment 2: Palindrome Linked List
     // O(n) time, O(1) extra space
@@ -123,4 +124,29 @@ public class Assignment1_2_3 {
             cur = nxt;
         }
         return prev;
+    }
+    
+    // -------------------------
+    // Assignment 3: Trapped Rainwater
+    // Two-pointer O(n) time, O(1) space
+    // -------------------------
+    static int trapRainwater(int[] height) {
+        if (height == null || height.length < 3) return 0;
+
+        int left = 0, right = height.length - 1;
+        int leftMax = 0, rightMax = 0;
+        int water = 0;
+
+        while (left < right) {
+            if (height[left] <= height[right]) {
+                if (height[left] >= leftMax) leftMax = height[left];
+                else water += (leftMax - height[left]);
+                left++;
+            } else {
+                if (height[right] >= rightMax) rightMax = height[right];
+                else water += (rightMax - height[right]);
+                right--;
+            }
+        }
+        return water;
     }
