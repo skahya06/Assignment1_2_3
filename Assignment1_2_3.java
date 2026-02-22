@@ -223,3 +223,5 @@ public class Assignment1_2_3 {
 
         System.out.println("Elevation: " + Arrays.toString(elevation));
         System.out.println("Trapped water = " + trapped + " units");
+         }
+}
