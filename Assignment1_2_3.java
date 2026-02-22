@@ -150,3 +150,76 @@ public class Assignment1_2_3 {
         }
         return water;
     }
+// -------------------------
+    // Main demo (matches assignment steps)
+    // -------------------------
+    public static void main(String[] args) {
+
+        // ===== Assignment 1 Demo =====
+        System.out.println("=== Assignment 1: Basic Linked List Ops ===");
+
+        // Create empty list
+        Node head = null;
+
+        // Insert at least three nodes (using populate method style)
+        // Note: populate does head-insert in this order.
+        head = populate(10, 20, 30); // results: 30 -> 20 -> 10
+
+        System.out.print("List after inserts: ");
+        printList(head);
+
+        // Search for a node
+        int target = 20;
+        Node found = listSearch(head, target);
+        System.out.println("Search for " + target + ": " + (found != null ? "FOUND" : "NOT FOUND"));
+
+        // Delete one node by passing node reference (delete the found node)
+        head = listDelete(head, found);
+
+        System.out.print("List after deleting node " + target + ": ");
+        printList(head);
+
+        // ===== Assignment 2 Demo =====
+        System.out.println("\n=== Assignment 2: Palindrome Linked List ===");
+
+        Node p1 = populate(1, 2, 3, 2, 1); // will print as 1 -> 2 -> 3 -> 2 -> 1? careful: populate head-inserts
+        // Because populate uses head-insert, populate(1,2,3,2,1) produces 1->2->3->2->1 (palindrome) only if inserted reversed.
+        // So we’ll build explicitly to match examples:
+        Node palA = null;
+        palA = listInsert(palA, new Node(1));
+        palA = listInsert(palA, new Node(2));
+        palA = listInsert(palA, new Node(3));
+        palA = listInsert(palA, new Node(2));
+        palA = listInsert(palA, new Node(1)); // palA is 1->2->3->2->1
+
+        System.out.print("List: ");
+        printList(palA);
+        System.out.println("Palindrome? " + isPalindrome(palA));
+
+        Node palB = null;
+        palB = listInsert(palB, new Node(10));
+        palB = listInsert(palB, new Node(20));
+        palB = listInsert(palB, new Node(20));
+        palB = listInsert(palB, new Node(10)); // 10->20->20->10
+
+        System.out.print("List: ");
+        printList(palB);
+        System.out.println("Palindrome? " + isPalindrome(palB));
+
+        Node notPal = null;
+        notPal = listInsert(notPal, new Node(5));
+        notPal = listInsert(notPal, new Node(10));
+        notPal = listInsert(notPal, new Node(17)); // 17->10->5 (not palindrome)
+
+        System.out.print("List: ");
+        printList(notPal);
+        System.out.println("Palindrome? " + isPalindrome(notPal));
+
+        // ===== Assignment 3 Demo =====
+        System.out.println("\n=== Assignment 3: Trapped Rainwater ===");
+
+        int[] elevation = {1, 2, 1, 4, 1, 2, 1, 5, 0, 0, 2, 1, 5};
+        int trapped = trapRainwater(elevation);
+
+        System.out.println("Elevation: " + Arrays.toString(elevation));
+        System.out.println("Trapped water = " + trapped + " units");
